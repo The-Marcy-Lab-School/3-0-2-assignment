@@ -61,6 +61,8 @@ describe(testSuiteName, () => {
       console.log('YOUR TESTING ERROR:', error.message);
       expect(error).toBeUndefined();
     }
+
+    scoreCounter.correct(expect); // DO NOT TOUCH
   });
 
   it('Catches a network error', async () => {
