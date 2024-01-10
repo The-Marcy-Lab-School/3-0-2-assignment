@@ -1,6 +1,6 @@
-# Assignment 3.0.1 - Fetch
+# Assignment 3.0.2 - Async/Await
 
-- [Assignment 3.0.1 - Fetch](#assignment-301---fetch)
+- [Assignment 3.0.2 - Async/Await](#assignment-302---asyncawait)
 - [Short Answers](#short-answers)
 - [Question 1: pass in the arguments](#question-1-pass-in-the-arguments)
 - [Question 2: Make the function async](#question-2-make-the-function-async)
