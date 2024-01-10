@@ -2,7 +2,7 @@
 
 - [Assignment 3.0.2 - Async/Await](#assignment-302---asyncawait)
 - [Short Answers](#short-answers)
-- [Question 1: pass in the arguments](#question-1-pass-in-the-arguments)
+- [Question 1: Pass in the arguments](#question-1-pass-in-the-arguments)
 - [Question 2: Make the function async](#question-2-make-the-function-async)
 - [Question 3: Return a tuple](#question-3-return-a-tuple)
 - [Question 4: Make the fetch call](#question-4-make-the-fetch-call)
@@ -17,7 +17,7 @@ This is perhaps the most utilitarian assignment you've had yet. This assignments
 # Short Answers
 Do these first to make sure you understand the pros and cons of Async/Await vs .then/.catch!
 
-# Question 1: pass in the arguments
+# Question 1: Pass in the arguments
 Our function is going to be essentially a wrapper for the `fetch` api, so that means we should be able to pass in the same arguments as we would to `fetch`. That means a `url` string (first param), and an `options` object (second param). Just for fun, set the `options` object to have a default value of `{}`.
 
 # Question 2: Make the function async
