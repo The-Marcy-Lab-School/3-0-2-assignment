@@ -12,10 +12,10 @@
 - [Question 8: Return the tuple](#question-8-return-the-tuple)
 - [You're done!](#youre-done)
 
-This is perhaps the most utilitarian assignment you've had yet. This assignments is going to do is use Async/Await to create a nice, versatile fetch handler that you can use throughout the rest of the course. You'll only be editing the `fetchHandler` function in `from-scratch.js`, however we have included a blank `main.js` file if you want to experiment with your fetch handler as you go!
+This is perhaps the most utilitarian assignment you've had yet. In this assignment, you will use `async`/`await` to create a nice, versatile fetch handler that you can use throughout the rest of the course. You'll only be editing the `fetchHandler` function in `from-scratch.js`, however we have included a blank `main.js` file if you want to experiment with your fetch handler as you go!
 
 # Short Answers
-Do these first to make sure you understand the pros and cons of Async/Await vs .then/.catch!
+Do these first to make sure you understand the pros and cons of `async`/`await` vs `.then`/`.catch`!
 
 # Question 1: Pass in the arguments
 Our function is going to be essentially a wrapper for the `fetch` api, so that means we should be able to pass in the same arguments as we would to `fetch`. That means a `url` string (first param), and an `options` object (second param). Just for fun, set the `options` object to have a default value of `{}`.
@@ -24,9 +24,35 @@ Our function is going to be essentially a wrapper for the `fetch` api, so that m
 Of course we can't move on without this crucial step! Make sure that your function is properly set to `async`.
 
 # Question 3: Return a tuple
-A `tuple` (pronounced "TWO-pl" or "TUH-pl") is an "immutable" list with a fixed number of elements. Now, JS doesn't have a "Tuple" type, so all that means is we use an array with a fixed number of elements that you won't alter.
+A `tuple` (pronounced "TWO-pl" or "TUH-pl") is an "immutable" list with a fixed number of elements. JavaScript doesn't have a "Tuple" type but we can use an array with a fixed number of elements that you will not alter to represent one.
 
-We bring that up because that's what our function is going to return: a tuple with two elements. The first element will be the data, and the second element will be the error. But it's an either or situation. If there is data, there is no error. If there is an error, there is no data. So we can't have both. That's why we use a tuple. We know the data will *always* be in the first element, and the error will *always* be in the second element.
+We bring this up because our function is going to return a tuple (an array) with two elements. 
+* The first element will be the data
+* The second element will be the error. 
+
+But it's an either/or situation:
+* If there is data, there is no error.
+* If there is an error, there is no data. 
+
+```js
+// a tuple with data in the first position and a null error
+const resultWithData = [{ message: "hello" }, null];
+
+// a tuple with no data and an error in the second position
+const resultWithError = [null, { message: "error!" }];
+```
+
+So we can't have both. That's why we use a tuple: we can return the data/error in a consistent manner. We know the data will *always* be in the first element, and the error will *always* be in the second element. If there is no data, we know that there *must* be an error.
+
+```js
+const [data, error] = await fetchData('https://some-api.com');
+if (error) {
+  console.error(error);
+}
+else {
+  doSomethingWith(data);
+}
+```
 
 **For now, set your function to return [{}, null]. We'll change that later.**
 
@@ -67,10 +93,10 @@ Pretty sure you've never used this, so we'll help you with the check:
 
 ```js
 // get the headers from the response.headers
-const isJson = (headers.get('content-type') || '').includes('application/json');
+const isJson = (response.headers.get('content-type') || '').includes('application/json');
 ```
 
-Study that code! `headers.get` will return `null` if it finds nothing, which will break `includes`, so we're using `short circuiting` to make sure we're either getting a text string or an empty string.
+Study that code! `headers.get` will return `null` if it finds nothing, which will break `includes`, so we're using **short circuiting** to make sure we're either getting a text string or an empty string.
 
 With that out of the way, it's up to you to figure out whether to use `response.json()` or `response.text()`.
 
@@ -80,6 +106,17 @@ With that out of the way, it's up to you to figure out whether to use `response.
 # Question 8: Return the tuple
 And finally, with our response parsed either as text or JSON safely, we can return the tuple with the data in the first element and `null` in the second. We *could* simply return [data] with no second value, but that's not a tuple! And we want to be consistent. `null` tells anyone "This was intentional, there is no error, we didn't simply miss it".
 
-
 # You're done!
 OK! No big deal here, this wasn't really about "testing" you, just about giving you a cool tool to use whenever you want to fetch something. We hope you liked it, and learned something along the way!
+
+If you'd like, try testing out your code. You should be able to user your helper like this now:
+
+```js
+const getRandomDog = async () => {    
+  const [dogData, error] = await fetchData('https://dog.ceo/api/breeds/image/random');
+
+  if (dogData) console.log(dogData);
+};
+
+getRandomDog();
+```

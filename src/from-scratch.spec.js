@@ -18,7 +18,7 @@ const usersUrl = `${baseUrl}/users`;
 
 describe(testSuiteName, () => {
   afterEach(() => {
-      vi.restoreAllMocks()
+    vi.restoreAllMocks()
   });
 
   it('Returns a promise', async () => {
@@ -190,7 +190,7 @@ describe(testSuiteName, () => {
       expect(error).toBeNull();
     } catch (error) {
       console.log('YOUR TESTING ERROR:', error.message);
-      expect(error).toBeUndefin=ed();
+      expect(error).toBeUndefined();
     }
 
     scoreCounter.correct(expect); // DO NOT TOUCH
